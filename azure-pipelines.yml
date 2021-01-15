@@ -10,7 +10,7 @@ resources:
 
 variables:
   app: 'claim-reporter-app'
-  image: '$(dockerNamespace)/claim-reporter-app'
+  image: '$(dockerNamespace)/devops-project-app'
   tag: '$(Build.BuildId)'
 
 stages:
