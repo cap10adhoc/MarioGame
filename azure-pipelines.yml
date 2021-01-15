@@ -22,5 +22,5 @@ steps:
 - task: AzureWebApp@1
   inputs:
     azureSubscription: 'Connect-azure'
-    appName: 'mario-game-rg'
+    appName: '${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_GREEN_BAY_0D294651E }}'
     package: $(Build.ArtifactStagingDirectory)/**/*.zip
