@@ -21,6 +21,6 @@ steps:
     publishLocation: 'Container'
 - task: AzureWebApp@1
   inputs:
-    azureSubscription: 'cb5889aa-badc-47b7-8a9d-836459d9ddaf'
+    azureSubscription: 'Connect-azure'
     appName: 'mario-game-rg'
     package: $(Build.ArtifactStagingDirectory)/**/*.zip
