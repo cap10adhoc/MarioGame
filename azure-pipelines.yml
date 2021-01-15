@@ -1,0 +1,42 @@
+# Docker t
+# Build a Docker image 
+# https://docs.microsoft.com/azure/devops/pipelines/languages/docker
+
+trigger:
+- main
+
+resources:
+- repo: self
+
+variables:
+  app: 'claim-reporter-app'
+  image: '$(dockerNamespace)/devops-project-app'
+  tag: '$(Build.BuildId)'
+
+stages:
+- stage: Build
+  displayName: Build image
+  jobs:  
+  - job: Build
+    displayName: Build
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - script: docker login -u $(dockerId) -p $(dockerPass)
+      displayName: 'docker login'
+    - script: docker build -t $(image) $(app)
+      displayName: 'docker build $(app)'
+    - script: docker tag $(image) $(image):$(tag)
+      displayName: 'docker tag $(image):$(tag)'
+    - script: docker push $(image):$(tag)
+      displayName: 'docker push $(image):$(tag)'
+    - script: docker push $(image):latest
+      displayName: 'docker push $(image):latest'
+    
+    - task: Docker@2
+      displayName: Build an image
+      inputs:
+        command: build
+        dockerfile: '**/Dockerfile'
+        tags: |
+          $(tag)
