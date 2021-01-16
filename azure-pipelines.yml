@@ -19,8 +19,4 @@ steps:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
     ArtifactName: 'drop'
     publishLocation: 'Container'
-- task: AzureWebApp@1
-  inputs:
-    azureSubscription: 'Connect-azure'
-    appName: 'mario-game-asp'
-    package: $(Build.ArtifactStagingDirectory)/**/*.zip
+
